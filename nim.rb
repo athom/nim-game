@@ -6,7 +6,6 @@ class Nim
       @seeds ||= []
       @seeds[i] = 1 + rand(max_num)
     end
-    @seeds=[5,4,3]
   end
 
   def ui actor
@@ -42,12 +41,8 @@ class Nim
     @seeds.delete @seeds[index] if @seeds[index] == 0
   end
 
-  def win_state
-    !@seeds.empty? and @seeds.inject(0){|sum, x| sum ^ x } == 0	
-  end
-
   def smart_ai_action
-    return stupid_ai_action if win_state
+    return stupid_ai_action if !@seeds.empty? and @seeds.inject(0){|sum, x| sum ^ x } == 0	
 
     h ||= {}
     seeds = @seeds.clone
